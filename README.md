@@ -25,37 +25,36 @@
 ## Структура проекта
 ```
 TZsecunda/
-├── alembic/                   # Миграции базы данных
+├── alembic/                   
+│   └── ...                     # Каталог для миграций базы данных, создаваемых Alembic
 ├── app/
-│   ├── main.py                # Точка входа FastAPI
-│   ├── database.py            # Подключение к PostgreSQL
-│   ├── dependencies.py        # Depends
-│   ├── crud/                  # круды - логика 
-│   │   ├── organizations.py   
-│   │   ├── buildings.py       
-│   │   └── activities.py      
+│   ├── main.py                 # Точка входа FastAPI приложения. Здесь создается экземпляр FastAPI, подключаются роутеры и middleware
+│   ├── database.py             # Настройка подключения к PostgreSQL через SQLAlchemy, создание сессий
+│   ├── dependencies.py         # Общие зависимости для маршрутов (Depends), например получение DB-сессии
+│   ├── crud/                   # Папка с бизнес-логикой и операциями CRUD
+│   │   ├── organizations.py    # CRUD-операции для организаций (создание, получение, фильтры)
+│   │   ├── buildings.py        # CRUD-операции для зданий
+│   │   └── activities.py       # CRUD-операции для видов деятельности
 │   │
-│   ├── models/                # модели
-│   │   ├── organizations.py   
-│   │   ├── buildings.py      
-│   │   └── activities.py 
-│   │ 
-│   ├── routers/
-│   │   ├── organizations.py   # Эндпоинты организаций
-│   │   ├── buildings.py       # Эндпоинты зданий
-│   │   └── activities.py      # Эндпоинты видов деятельности
+│   ├── models/                 # Модели базы данных (SQLAlchemy)
+│   │   ├── organizations.py    # Модель организации
+│   │   ├── buildings.py        # Модель здания
+│   │   └── activities.py       # Модель вида деятельности
 │   │
-│   └── schemas/               # Pydantic-схемы
-│       ├── organization.py
-│       ├── building.py
-│       └── activity.py
-│   
-├── alembic.ini       
-├── docker-compose.yml         # Запуск всех сервисов
-├── requirements.txt           # Необходимые библиотеки
-├── Dockerfile                 # Запуск всех сервисов
-├── docker-compose.yml         # Запуск всех сервисов
-└── 
+│   ├── routers/                # Роутеры FastAPI — здесь определяются эндпоинты
+│   │   ├── organizations.py    # Эндпоинты для организаций (GET, POST, поиск и т.д.)
+│   │   ├── buildings.py        # Эндпоинты для зданий
+│   │   └── activities.py       # Эндпоинты для видов деятельности
+│   │
+│   └── schemas/                # Pydantic-схемы для валидации и сериализации данных
+│       ├── organization.py     # Схемы OrganizationCreate, OrganizationOut и т.д.
+│       ├── building.py         # Схемы для здания
+│       └── activity.py         # Схемы для вида деятельности
+│
+├── alembic.ini                 # Основной конфигурационный файл Alembic для миграций базы данных
+├── docker-compose.yml          # Конфигурация Docker Compose для запуска всех сервисов (FastAPI, PostgreSQL и др.)
+├── requirements.txt            # Список Python-зависимостей проекта
+└── Dockerfile                  # Инструкция для сборки Docker-образа приложения
 ```
 
 ## Запуск проекта
