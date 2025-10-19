@@ -17,6 +17,20 @@ router = APIRouter(prefix="/activities", tags=["Activities"])
     description="""
 Создает новый вид деятельности.  
 Если указан `parent_id`, проверяет существование родителя и уровень вложенности (максимум 3).
+
+    Пример запроса для нового родителя:
+    
+    {
+      "name": "Еда",
+      "parent_id": null   
+    }
+
+    Пример запроса для вложенной деятельности:
+    
+    {
+      "name": "Мясная продукция",
+      "parent_id": 1   
+    }
 """
 )
 def create_activity_endpoint(activity_in: ActivityCreate, db: Session = Depends(get_db)):

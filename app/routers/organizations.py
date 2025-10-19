@@ -27,7 +27,20 @@ router = APIRouter(
     "/",
     response_model=OrganizationOut,
     summary="Создать организацию",
-    description="Добавляет новую организацию с её зданием, телефонами и видами деятельности.",
+    description="""
+    Добавляет новую организацию с её зданием, телефонами и видами деятельности.
+    
+    Пример запроса: 
+    {
+      "name": "Моя компания",
+      "building_id": 1,
+      "phones": [
+        {"phone": "+7 123 456 78 90"},
+        {"phone": "+7 987 654 32 10"}
+      ],
+      "activity_ids": [1, 2]  # id уже существующих activities в БД, сначала добавьте activities
+    }
+    """
 )
 def create_organization_endpoint(org_in: OrganizationCreate, db: Session = Depends(get_db)):
     try:
